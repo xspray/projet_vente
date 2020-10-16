@@ -15,6 +15,7 @@ class Categorie extends React.Component {
           imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
          
           id: 1,
+          linkUrl: 'chapeaux'
         },
 
         {
@@ -23,6 +24,7 @@ class Categorie extends React.Component {
           imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
 
           id: 2,
+          linkUrl: 'vestes'
         },
 
         {
@@ -31,6 +33,7 @@ class Categorie extends React.Component {
           imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
 
           id: 3,
+          linkUrl: 'baskets'
         },
 
         {
@@ -39,6 +42,7 @@ class Categorie extends React.Component {
           imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
           taille: 'large',
           id: 4,
+          linkUrl: 'femmes'
         },
 
         {
@@ -47,6 +51,7 @@ class Categorie extends React.Component {
           imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
           taille: 'large',
           id: 5,
+          linkUrl: 'hommes'
         },
       ],
     };
@@ -55,8 +60,9 @@ class Categorie extends React.Component {
   render() {
     return (
       <div className="categories">
-        {this.state.sections.map(({titre, imageUrl, id, taille}) => (
-          <ChoixItem key={id} titre={titre} imageUrl={imageUrl} taille={taille}/>
+        {this.state.sections.map(({titre, imageUrl, id, taille, linkUrl}) => (
+          <ChoixItem key={id} titre={titre} imageUrl={imageUrl} taille={taille} 
+          linkUrl={linkUrl}/>
         ))}
       </div>
     );
