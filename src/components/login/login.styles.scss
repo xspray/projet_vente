@@ -1,0 +1,21 @@
+.login {
+  width: 380px;
+}
+
+.login {
+  width: 30vw;
+
+  display: flex;
+
+  flex-direction: column;
+
+  .titre {
+    margin: 10px 0;
+  }
+
+  .bouttons {
+    display: flex;
+
+    justify-content: space-between;
+  }
+}
