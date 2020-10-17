@@ -5,7 +5,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shopping/shopping.component";
 import LoginEtInscription from "./pages/login-et-inscription/login-et-inscription.component";
 import Header from "./components/header/header.component";
-import { auth } from "./firebase/firebase.utils";
+import { auth, creerUserProfilDocument } from "./firebase/firebase.utils";
 
 class App extends React.Component {
   constructor() {
@@ -16,22 +16,38 @@ class App extends React.Component {
     };
   }
 
-  deconnexionDeAuth = null
+  deconnexionDeAuth = null;
 
   componentDidMount() {
-    this.deconnexionDeAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser : user })
-    })
+    this.deconnexionDeAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await creerUserProfilDocument(userAuth);
+
+        userRef.onSnapshot((capture) => {
+          this.setState(
+            {
+              currentUser: {
+                id: capture.id,
+
+                ...capture.data(),
+              },
+            }
+          );
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
+    });
   }
 
   componentWillUnmount() {
-    this.deconnexionDeAuth()
+    this.deconnexionDeAuth();
   }
 
   render() {
     return (
       <div>
-        <Header currentUser={this.state.currentUser}/>
+        <Header currentUser={this.state.currentUser} />
 
         <Switch>
           <Route exact path="/" component={HomePage} />
